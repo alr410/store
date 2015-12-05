@@ -1,7 +1,10 @@
 # Класс фильм
 class Film < Product
-  def initialize(name, price, quantity)
-    super
-  end
 
+  def update(options)
+    @name = options[:title]
+    @director = options[:director_name]
+    @year_of_release = options[:year_of_release]
+
+  end
 end

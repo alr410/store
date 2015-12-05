@@ -2,6 +2,8 @@
 # Создадим объект фильм
 require_relative "#{File.dirname(__FILE__)}/product.rb"
 require_relative "#{File.dirname(__FILE__)}/film.rb"
+require_relative "#{File.dirname(__FILE__)}/music_album.rb"
+require_relative "#{File.dirname(__FILE__)}/book.rb"
 
 # encoding: utf-8
 if (Gem.win_platform?)
@@ -13,6 +15,8 @@ if (Gem.win_platform?)
   end
 end
 
-leon = Film.new('Леон', '300', '29')
+leon = Film.new('300', '29')
+
+leon.update(:title => 'Леон', :director_name => 'Люк Бессон', :year_of_release => '1994')
 
 puts "Фильм #{leon.name} стоит #{leon.price} руб."

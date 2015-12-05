@@ -2,10 +2,11 @@
 # При создании нового продукта можно передать значения цены и остатка
 
 class Product
-  def initialize(name, price, quantity)
-    @name = name
+  def initialize(price, quantity)
+    @name = ""
     @price = price
     @quantity = quantity
+
   end
 
   # Метод, который позволяет посмотреть цену
@@ -16,5 +17,10 @@ class Product
   # Метод, который позволяет посмотреть название продукта
   def name
     @name
+  end
+
+  # абстрактный метод
+  def update(options)
+    # todo: должен реализовываться детьми
   end
 end

@@ -1,6 +1,10 @@
 # Класс книги
 class Book < Product
-  def initialize(name, price, quantity)
-    super
+
+  def update(options)
+    @name = options[:title]
+    @author = options[:author_name]
+
   end
+
 end
