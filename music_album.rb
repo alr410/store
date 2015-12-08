@@ -2,8 +2,12 @@
 class MusicAlbum < Product
 
   def update(options)
-    @name = options[:album_name]
-    @artist_name = options[:artist_name]
-    @music_genre = options[:music_genre]
+    @name = options[:title]
+    @artist_name = options[:singer]
+    @music_direction = options[:direction]
+  end
+
+  def info
+    "Альбом: #{@name}, поет: #{@artist_name}, жанр: #{@music_direction}"
   end
 end
