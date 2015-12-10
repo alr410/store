@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+
+<!-- Список продуктов в магазине -->
+<products>
+  <product price="1300" quantity="6">
+    <book title="Приключения Тома Сойера" author_name="Марк Твен">
+    </book>
+  </product>
+
+  <product price="1100" quantity="8">
+    <music_album title="Judas Priest" artist_name="Turbo" music_direction="Heavy Metal">
+    </music_album>
+  </product>
+
+  <product price="1600" quantity="3">
+    <film title="Леон" director_name="Люк Бессон" year_of_release="1994">
+    </film>
+  </product>
+
+  <product type="Film" price="900" quantity="2">
+    <film title="Человек дождя" director_name="Барри Левинсон" year_of_release="1998">
+    </film>
+  </product>
+
+  <product price="1250" quantity="11">
+    <film title="Тёмный рыцарь" director_name="Кристофер Ноланн" year_of_release="2008">
+    </film>
+  </product>
+
+</products>

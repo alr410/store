@@ -34,7 +34,6 @@ class Product
   # показывает кроме информации ещё и стоимость товара
   def show
     nomenclature = info + " - #{@price} руб. [осталось:  #{@quantity}]"
-    return nomenclature
   end
 
   # Статический метод showcase, который принимает на вход массив продуктов,
@@ -45,7 +44,7 @@ class Product
     }
   end
 
-  # Мметод покупки buy: он проверяет, остался ли товар на складе
+  # Метод покупки buy: он проверяет, остался ли товар на складе
   # (@quantity должно быть больше нуля) и если остался — пишет
   # об удачной покупке, уменьшает количество на складе на 1 и возвращает стоимость товара.
   def buy
@@ -61,6 +60,61 @@ class Product
       puts "********************************************************************************"
       0
     end
+  end
 
+  # статический метод read_from_xml, который в качестве параметра
+  # принимает, имя файла со списком продуктов и передает его парсеру REXML
+  # возвращает: хеш - описание продуктов в магазине
+  def self.read_from_xml(file_xml)
+    # Подключим встроенный парсер REXML
+    require "rexml/document"
+
+    # Откроем файл переданный в качестве параметра
+    f = File.new(file_xml, "r:UTF-8")
+
+    # Создадим объект, позволяющий использовать методы REXML
+    doc = REXML::Document.new(f)
+
+    # Создадим массив с описанием продукци
+    store = []
+    prod = nil
+
+    # Создадим экземпляры объектов и наполним ими массив
+    doc.elements.each("products/product") { |element|
+      price = element.attributes["price"].to_i # цена продукта
+      quantity = element.attributes["quantity"].to_i # оставшееся количество продукта
+
+      element.elements.each("book") { |item|
+        prod = Book.new(price, quantity) # экземпляр класса
+        prod.update(
+            title: item.attributes["title"],
+            author_name: item.attributes["author_name"]
+        )
+      }
+
+      element.elements.each("film") { |item|
+        prod = Film.new(price, quantity) # экземпляр класса
+        prod.update(
+            title: item.attributes["title"],
+            director_name: item.attributes["director_name"],
+            year_of_release: item.attributes["year_of_release"]
+        )
+      }
+
+      element.elements.each("music_album") { |item|
+        prod = MusicAlbum.new(price, quantity) # экземпляр класса
+        prod.update(
+            title: item.attributes["title"],
+            singer: item.attributes["artist_name"],
+            direction: item.attributes["music_direction"]
+        )
+      }
+
+      store << prod
+    }
+
+    f.close # Закроем файл
+
+    store
   end
 end

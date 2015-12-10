@@ -15,27 +15,35 @@ require_relative "#{File.dirname(__FILE__)}/film.rb"
 require_relative "#{File.dirname(__FILE__)}/music_album.rb"
 require_relative "#{File.dirname(__FILE__)}/book.rb"
 
+# Откроем файл xml с описанием товара
+current_path = File.dirname(__FILE__)
+f_xml = current_path + "/data/products.xml"
 
-store = []
-prod = Film.new('230', '28')
-prod.update(:title => 'Леон', :director_name => 'Люк Бессон', :year_of_release => '1994')
-store.push(prod)
+# если файл отсутствует, то напишим сообщение и выйдем из программы
+abort "The file is absent!!!" unless File.exist?(f_xml)
 
-rain_man = Film.new('210', '16')
-store << rain_man
-rain_man.update(:title => 'Человек дождя', :director_name => 'Барри Левинсон', :year_of_release => '1988')
+# Создадим массив при помощи статической функции read_from_xml(file_xml)
+store = Product.read_from_xml(f_xml)
 
-dark_knight = Film.new('490', '7')
-store << dark_knight
-dark_knight.update(:title => 'Тёмный рыцарь', :director_name => 'Кристофер Ноланн', :year_of_release => '2008')
-
-book_tom_soyer = Book.new('112', '2')
-store << book_tom_soyer
-book_tom_soyer.update(:title => 'Приключения Тома Сойера', :author => 'Марк Твен')
-
-disk_judas_priest = MusicAlbum.new('1012', '8')
-store << disk_judas_priest
-disk_judas_priest.update(:title => 'Judas Priest', :singer => 'Turbo', :direction => 'Heavy Metal')
+# prod = Film.new('230', '28')
+# prod.update(:title => 'Леон', :director_name => 'Люк Бессон', :year_of_release => '1994')
+# store.push(prod)
+#
+# rain_man = Film.new('210', '16')
+# store << rain_man
+# rain_man.update(:title => 'Человек дождя', :director_name => 'Барри Левинсон', :year_of_release => '1988')
+#
+# dark_knight = Film.new('490', '7')
+# store << dark_knight
+# dark_knight.update(:title => 'Тёмный рыцарь', :director_name => 'Кристофер Ноланн', :year_of_release => '2008')
+#
+# book_tom_soyer = Book.new('112', '2')
+# store << book_tom_soyer
+# book_tom_soyer.update(:title => 'Приключения Тома Сойера', :author => 'Марк Твен')
+#
+# disk_judas_priest = MusicAlbum.new('1012', '8')
+# store << disk_judas_priest
+# disk_judas_priest.update(:title => 'Judas Priest', :singer => 'Turbo', :direction => 'Heavy Metal')
 
 # 1. Функция "letter_or_number(letter)" позволяет выяснить введенный строковый параметр цифра или другой знак
 # 2. Параметр letter - тип строка
@@ -57,7 +65,7 @@ end
 
 choice = -1
 sum = 0
-# Будем предлагать купить товар, пока пользователь не выберет "х"
+#Будем предлагать купить товар, пока пользователь не выберет "х"
 
 while choice != "x" do
   puts "Что хотите купить?"
